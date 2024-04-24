@@ -2,11 +2,11 @@ pipeline {
     agent any
     
     options {
-        // Opciones adicionales si las necesitas
+        timeout(time:5, unit: 'MINUTES')
     }
     
     environment {
-        // Variables de entorno si las necesitas
+         RUTA_ABSOLUTA = "C:\\"
     }
     
     stages {
