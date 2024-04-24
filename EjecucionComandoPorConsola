@@ -1,1 +1,74 @@
+//Ejecucion de Comandos en consola.
 
+def command = "cmd /c ipconfig /flushdns"
+def procedimiento = command.execute()
+procedimiento.waitFor() //Esto es necesario ya que nos tenemos que asegurar que el script no continue hasta que llegue a este comando. 
+println("Salida del comando: ${procedimiento.text}")
+
+//Todas las tareas generadas hasta el día de la fecha.
+Jenkins.instance.getAllItems().each { job -> println(job.fullName)}
+
+//Obtener informacion de un job, y eliminarlo
+def nombreTarea = "Tarea Libre 1"
+def job = Jenkins.instance.getItem(nombreTarea)
+println("Nombre del trabajo: ${job.fullName}")
+println("Descripcion: ${job.description}")
+job.delete()
+println("Se ha eliminado el job: ${nombreTarea}")
+
+//Determino el numero de ejecuciones de una tarea y su respectivo estado.
+def nombreTarea = "Ejemplo_10"
+def job = Jenkins.instance.getItemByFullName(nombreTarea)
+def builds = job.builds
+builds.each { build -> println("Numero de construcción: ${build.number}, Estado: ${build.result}")}
+
+//Obtener la lista de todos los usuarios
+def allUsers = User.getAll()
+println("Todos los usuarios:")
+allUsers.each { user ->
+    println("- ${user.id}")
+}
+
+
+//Borro un usuario determinado
+def usuario_id = "UsuarioFinal"
+def usuario = User.get(usuario_id)
+if (usuario != null)
+{
+  usuario.delete()
+  println("Usuario: ${usuario_id} borrado exitosamente.")
+}
+else
+  {
+    println("No se encontro el usuario indicado con el siguiente id ${usuario_id}")
+  }
+
+
+//Borro lista de usuarios
+def usuarios_id = ["UsuarioFinal3", "UsuarioFinal2", "UsuarioFinal1"]
+usuarios_id.each { usuario_id -> 
+  def usuario = User.get(usuario_id)
+  if(usuario != null)
+  {
+    usuario.delete()
+    println("Usuario ${usuario_id} borrado exisotamente.")
+  }
+  else
+    {
+      println ("No se encontro el usuario con el id ${usuario_id}")
+    }
+               }
+//Agregar un usuario desde la consola
+import hudson.security.* //Importan el paquete de Hudson dentro de Jenkins. Estas clases proporcionan funcionalidades relacionadas con la seguridad y el envio de correos electronicos.
+import hudson.tasks.Mailer
+def securityRealm = new HudsonPrivateSecurityRealm(false) //Generar una nueva instancia de HudsonPrivateSecurityRealm. Este objeto representa al reino de seguridad en Jenkins y es responsable de administrar los usuarios y sus credenciales.
+securityRealm.createAccount("UsuarioFinal", "contrasenia") // Accedo al metodo createAccount
+def nuevoUser = securityRealm.getUser("UsuarioFinal") //Obtener el nuevo usuario generado. 
+if (nuevoUser != null) 
+{
+  println("Usuario creado exitosamente: ${nuevoUser.id}")  
+}
+else 
+{
+  println("Hubo un error al crear el usuario")
+}
