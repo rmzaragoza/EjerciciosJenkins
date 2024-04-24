@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     
-                    writeFile(file: "informacion_operaciones.txt", text: contenido)
+                    writeFile(file: RUTA_ABSOLUTA + "informacion_operaciones.txt", text: contenido)
                     
                     println "Se ha generado el archivo informacion_operaciones.txt"
                 }
