@@ -1,1 +1,61 @@
+pipeline {
+    agent any
+    
+    options {
+        // Opciones adicionales si las necesitas
+    }
+    
+    environment {
+        // Variables de entorno si las necesitas
+    }
+    
+    stages {
+        stage('Stage 1: Operaciones aritméticas') {
+            steps {
+                script {
+                    def numero1 = 100
+                    def numero2 = 50
+                    
+                    def suma = numero1 + numero2
+                    def resta = numero1 - numero2
+                    def multiplicacion = numero1 * numero2
+                    def division = numero1 / numero2
+                    
+                    println "Suma: ${suma}"
+                    println "Resta: ${resta}"
+                    println "Multiplicación: ${multiplicacion}"
+                    println "División: ${division}"
+                }
+            }
+        }
+        
+        stage('Stage 2: Ejecutar comando bat') {
+            steps {
+                bat 'ipconfig /flushdns'
+            }
+        }
+        
+        stage('Stage 3: Generar archivo txt') {
+            steps {
+                script {
+                    def contenido = "Información de las operaciones aritméticas:\n"
+                    contenido += "Suma: ${suma}\n"
+                    contenido += "Resta: ${resta}\n"
+                    contenido += "Multiplicación: ${multiplicacion}\n"
+                    contenido += "División: ${division}\n"
+                    
+                    writeFile file: 'informacion_operaciones.txt', text: contenido
+                    
+                    println "Se ha generado el archivo informacion_operaciones.txt"
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo "Mostrar siempre desde post"
+        }
+    }
+}
 
