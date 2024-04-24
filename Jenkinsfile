@@ -9,11 +9,8 @@ pipeline {
          RUTA_ABSOLUTA = "C:\\"
     }
     
-    def suma 
-    def resta
-    def multiplicacion
-    def division
-        
+   
+    contenido = "Información de las operaciones aritméticas:\n"     
     stages {
         stage('Stage 1: Operaciones aritméticas') {
             steps {
@@ -21,15 +18,17 @@ pipeline {
                     def numero1 = 100
                     def numero2 = 50
                     
-                    suma = numero1 + numero2
-                    resta = numero1 - numero2
-                    multiplicacion = numero1 * numero2
-                    division = numero1 / numero2
+                    def suma = numero1 + numero2
+                    def resta = numero1 - numero2
+                    def multiplicacion = numero1 * numero2
+                    def division = numero1 / numero2
+
+                    contenido += "Suma: ${suma}\n"
+                    contenido += "Resta: ${resta}\n"
+                    contenido += "Multiplicación: ${multiplicacion}\n"
+                    contenido += "División: ${division}\n"
                     
-                    println "Suma: ${suma}"
-                    println "Resta: ${resta}"
-                    println "Multiplicación: ${multiplicacion}"
-                    println "División: ${division}"
+                    println contenido
                 }
             }
         }
@@ -43,11 +42,6 @@ pipeline {
         stage('Stage 3: Generar archivo txt') {
             steps {
                 script {
-                    def contenido = "Información de las operaciones aritméticas:\n"
-                    contenido += "Suma: ${suma}\n"
-                    contenido += "Resta: ${resta}\n"
-                    contenido += "Multiplicación: ${multiplicacion}\n"
-                    contenido += "División: ${division}\n"
                     
                     writeFile(file: informacion_operaciones.txt, text: contenido)
                     
