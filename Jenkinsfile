@@ -24,8 +24,8 @@ pipeline {
 
                     contenido += "Suma: ${suma}\n"
                     contenido += "Resta: ${resta}\n"
-                    contenido += "Multiplicación: ${multiplicacion}\n"
-                    contenido += "División: ${division}\n"
+                    contenido += "Multiplicacion: ${multiplicacion}\n"
+                    contenido += "Division: ${division}\n"
                     
                     println contenido
                 }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     
-                    writeFile(file: informacion_operaciones.txt, text: contenido)
+                    writeFile(file: "informacion_operaciones.txt", text: contenido)
                     
                     println "Se ha generado el archivo informacion_operaciones.txt"
                 }
