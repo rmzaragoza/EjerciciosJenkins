@@ -41,8 +41,8 @@ pipeline {
         stage('Stage 3: Generar archivo txt') {
             steps {
                 script {
-                    path = RUTA_ABSOLUTA + "informacion_operaciones.txt"
-                    writeFile(file: path , text: contenido)
+                    
+                    writeFile(file: "informacion_operaciones.txt", text: contenido)
                     
                     println "Se ha generado el archivo informacion_operaciones.txt"
                 }
