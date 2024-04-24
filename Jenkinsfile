@@ -9,8 +9,9 @@ pipeline {
          RUTA_ABSOLUTA = "C:\\"
     }
     
-   
+   variables {   
     contenido = "Información de las operaciones aritméticas:\n"     
+   }
     stages {
         stage('Stage 1: Operaciones aritméticas') {
             steps {
