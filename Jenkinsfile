@@ -1,3 +1,4 @@
+contenido = "Informacion de las operaciones aritmeticas:\n" 
 pipeline {
     agent any
     
@@ -8,12 +9,9 @@ pipeline {
     environment {
          RUTA_ABSOLUTA = "C:\\"
     }
-    
-   variables {   
-    contenido = "Información de las operaciones aritméticas:\n"     
-   }
+
     stages {
-        stage('Stage 1: Operaciones aritméticas') {
+        stage('Stage 1: Operaciones aritmeticas') {
             steps {
                 script {
                     def numero1 = 100
